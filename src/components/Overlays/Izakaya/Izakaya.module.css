@@ -1,0 +1,8 @@
+.info {
+  position: absolute;
+  font-size: 28px;
+  bottom: 24px;
+  right: 24px;
+  color: white;
+  z-index: 1;
+}

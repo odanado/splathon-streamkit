@@ -5,7 +5,9 @@ export const Firebase = ({ children }: { children: React.ReactNode }) => {
   const app = useFirebaseApp();
   const db = getFirestore(app);
 
-  connectFirestoreEmulator(db, "localhost", 8080);
+  if (window.location.hostname === "localhost") {
+    connectFirestoreEmulator(db, "localhost", 8080);
+  }
 
   return <FirestoreProvider sdk={db}>{children}</FirestoreProvider>;
 };

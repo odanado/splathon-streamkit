@@ -4,20 +4,28 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Index } from "./routes/index";
 import { Console } from "./routes/console/$userId";
 import { Overlay } from "./routes/overlay/$userId";
+import { ConsoleLayout } from "./layouts/ConsoleLayout";
 import { Test } from "./test";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Index />,
+    element: <ConsoleLayout />,
+    children: [{ path: "/", element: <Index /> }],
   },
   {
     path: "overlay/:userId",
     element: <Overlay />,
   },
   {
-    path: "console/:userId",
-    element: <Console />,
+    path: "/",
+    element: <ConsoleLayout />,
+    children: [
+      {
+        path: "console/:userId",
+        element: <Console />,
+      },
+    ],
   },
   {
     path: "test",

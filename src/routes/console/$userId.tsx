@@ -1,54 +1,13 @@
 import { doc, setDoc } from "firebase/firestore";
-import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Input,
-  Flex,
-  Spacer,
-  Link,
-  Box,
-  Container,
-  Alert,
-  AlertIcon,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useFirestore } from "../../firebase";
 import { useMatch } from "../../hooks/use-match";
 import { matchSchema, type Match } from "../../schema/match";
 import { TeamForm } from "../../components/TeamForm";
 import { Team } from "../../schema/team";
 import { Usage } from "../../components/Usage";
-
-const Navbar = ({ userId }: { userId: string }) => {
-  return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      padding="1rem"
-      bg="teal.500"
-      color="white"
-    >
-      <Flex align="center" mr={5}>
-        <Box ml={3} fontSize="lg" fontWeight="bold">
-          Splathon Stremkit
-        </Box>
-      </Flex>
-
-      <Spacer />
-
-      <Box>ようこそ、{userId}さん</Box>
-    </Flex>
-  );
-};
-
-const AppContainer = ({ children }: React.PropsWithChildren) => {
-  return (
-    <Container maxW="container.xl" padding="1rem">
-      {children}
-    </Container>
-  );
-};
+import { WarningForBeta } from "../../components/WarningForBeta";
 
 export const Console = () => {
   const { userId } = useParams();
@@ -82,33 +41,26 @@ export const Console = () => {
 
   return (
     <Box>
-      <Navbar userId={userId} />
-      <AppContainer>
-        <Box mt={2}>
-          <Alert status="warning">
-            <AlertIcon />
-            開発中のサービスです。バグがあるかもしれません。 他人の userId
-            を入力すると他人のデータを変更できてしまいます！ご注意ください！
-          </Alert>
-        </Box>
-        <Box mt={2}>
-          <Usage userId={userId} />
-        </Box>
-        <Box mt={2}>
-          <TeamForm
-            side="アルファチーム"
-            team={match.alpha}
-            onChange={(team) => onChangeTeam("alpha", team)}
-          />
-        </Box>
-        <Box mt={2}>
-          <TeamForm
-            side="ブラボーチーム"
-            team={match.bravo}
-            onChange={(team) => onChangeTeam("bravo", team)}
-          />
-        </Box>
-      </AppContainer>
+      <Box mt={2}>
+        <WarningForBeta />
+      </Box>
+      <Box mt={2}>
+        <Usage userId={userId} />
+      </Box>
+      <Box mt={2}>
+        <TeamForm
+          side="アルファチーム"
+          team={match.alpha}
+          onChange={(team) => onChangeTeam("alpha", team)}
+        />
+      </Box>
+      <Box mt={2}>
+        <TeamForm
+          side="ブラボーチーム"
+          team={match.bravo}
+          onChange={(team) => onChangeTeam("bravo", team)}
+        />
+      </Box>
     </Box>
   );
 };

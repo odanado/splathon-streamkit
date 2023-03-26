@@ -22,7 +22,10 @@ export const Usage = ({ userId }: Props) => {
       </CardHeader>
       <CardBody>
         <OrderedList>
-          <ListItem>{`${url} を OBS の横1920px、縦1080pxでブラウザソースに登録`}</ListItem>
+          <ListItem>{`${url} をクリップボードにコピー`}</ListItem>
+          <ListItem>
+            コピーした URL を横1920px、縦1080pxのブラウザソースとして OBS に登録
+          </ListItem>
           <ListItem>この画面で名前やスコアを変更する</ListItem>
         </OrderedList>
       </CardBody>

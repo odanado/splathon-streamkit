@@ -1,7 +1,12 @@
 // @ts-check
 import { chromium, devices } from "playwright";
 import { initializeApp } from "firebase/app";
-import { getFirestore, writeBatch, doc } from "firebase/firestore";
+import {
+  getFirestore,
+  writeBatch,
+  doc,
+  connectFirestoreEmulator,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAvj2YRPK5ZYBB2bv8lLy_ZC9xko3ojglM",
@@ -71,11 +76,13 @@ const writeBatchScheduledMatches = async (scheduledMatches) => {
   const app = initializeApp(firebaseConfig);
   const firestore = getFirestore(app);
 
+  // connectFirestoreEmulator(firestore, "localhost", 8080);
+
   console.log("Writing to Firestore...");
   const batch = writeBatch(firestore);
 
   for (const match of scheduledMatches) {
-    const ref = doc(firestore, "scheduled_matches", match.id);
+    const ref = doc(firestore, "ladder_matches", match.id);
 
     batch.set(ref, { ...match });
   }

@@ -9,23 +9,18 @@ type Props = {
   onChange(team: Team): void | Promise<void>;
 };
 export const TeamForm = ({ side, team, onChange }: Props) => {
-  const [name, setName] = useState(team.name);
-  const [score, setScore] = useState(team.score);
+  console.log("render TeamForm", team);
 
   const handleNameChange = (event: any) => {
-    setName(event.target.value);
-
     onChange({
       name: event.target.value,
-      score: Number(score),
+      score: Number(team.score),
     });
   };
 
   const handleScoreChange = (event: any) => {
-    setScore(event.target.value);
-
     onChange({
-      name,
+      name: team.name,
       score: Number(event.target.value),
     });
   };
@@ -39,7 +34,7 @@ export const TeamForm = ({ side, team, onChange }: Props) => {
           <FormLabel htmlFor="name">チーム名:</FormLabel>
           <Input
             id="name"
-            value={name}
+            value={team.name}
             onChange={handleNameChange}
             placeholder="チーム名を入力してください"
             mb={3}
@@ -48,7 +43,7 @@ export const TeamForm = ({ side, team, onChange }: Props) => {
           <FormLabel htmlFor="score">Score:</FormLabel>
           <Select
             id="score"
-            value={score}
+            value={team.score}
             onChange={handleScoreChange}
             placeholder="スコアを選んでください"
             mb={3}

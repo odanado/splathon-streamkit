@@ -1,5 +1,5 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["firestore", "chakra"]
+  "cSpell.words": ["firestore", "chakra", "Splathon", "Streamkit"]
 }

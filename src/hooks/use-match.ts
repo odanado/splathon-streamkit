@@ -1,7 +1,7 @@
 import { doc } from "firebase/firestore";
 import { useFirestore } from "../firebase";
 import { matchSchema } from "../schema/match";
-import { useFirestoreDoc } from "./useFirestoreDoc";
+import { useFirestoreDoc } from "./use-firestore-doc";
 
 export const useMatch = (userId: string) => {
   const firestore = useFirestore();

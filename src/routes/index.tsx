@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMatch } from "../hooks/useMatch";
+import { useMatch } from "../hooks/use-match";
 
 export const Index = () => {
   const [userId, setUserId] = useState("");

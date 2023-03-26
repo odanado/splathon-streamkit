@@ -2,7 +2,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFirestore } from "../../firebase";
-import { useMatch } from "../../hooks/useMatch";
+import { useMatch } from "../../hooks/use-match";
 import { matchSchema, type Match } from "../../schema/match";
 
 export const Console = () => {

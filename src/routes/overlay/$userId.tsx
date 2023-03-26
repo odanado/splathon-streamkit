@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { OverlayContainer } from "../../components/OverlayContainer/OverlayContainer";
-import { useMatch } from "../../hooks/useMatch";
+import { useMatch } from "../../hooks/use-match";
 
 export const Overlay = () => {
   const { userId } = useParams();

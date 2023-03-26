@@ -1,7 +1,7 @@
 import { doc } from "firebase/firestore";
-import { useFirestore } from "reactfire";
+import { useFirestore } from "../firebase";
 import { matchSchema } from "../schema/match";
-import { useFirestoreDoc } from "./useHoge";
+import { useFirestoreDoc } from "./useFirestoreDoc";
 
 export const useMatch = (userId: string) => {
   const firestore = useFirestore();

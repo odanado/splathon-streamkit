@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { FirebaseAppProvider } from "reactfire";
-import { Firebase } from "./components/Firebase";
+import { Firebase } from "./firebase";
 import { Index } from "./routes/index";
 import { Console } from "./routes/console/$userId";
 import { Overlay } from "./routes/overlay/$userId";
@@ -35,12 +34,11 @@ const firebaseConfig = {
 };
 
 function App() {
+  const useEmulator = window.location.hostname === "localhost";
   return (
-    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-      <Firebase>
-        <RouterProvider router={router} />
-      </Firebase>
-    </FirebaseAppProvider>
+    <Firebase firebaseOptions={firebaseConfig} useEmulator={useEmulator}>
+      <RouterProvider router={router} />
+    </Firebase>
   );
 }
 

@@ -4,9 +4,9 @@ import { useMatch } from "../../hooks/useMatch";
 
 export const Overlay = () => {
   const { userId } = useParams();
-  const { status, match } = useMatch(userId ?? "", { subscribe: true });
+  const { isLoading, match } = useMatch(userId ?? "");
 
-  if (status === "loading" || !match) {
+  if (isLoading || !match) {
     return <div>loading...</div>;
   }
 

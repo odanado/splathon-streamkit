@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useMatch } from "../hooks/useMatch";
 
 export const Index = () => {
   const [userId, setUserId] = useState("");
+  const { match, matchOnce, isLoading, error } = useMatch("poyo");
+  console.log({ match, matchOnce, isLoading, error });
 
   return (
     <div>
+      <div>{JSON.stringify(matchOnce)}</div>
       <input
         value={userId}
         onChange={(e) => setUserId(e.target.value)}

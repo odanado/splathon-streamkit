@@ -20,9 +20,9 @@ export const Console = () => {
     },
   });
 
-  const { status, match } = useMatch(userId ?? "", { subscribe: true });
+  const { isLoading, match } = useMatch(userId ?? "");
 
-  if (status === "loading" || !match) {
+  if (isLoading || !match) {
     return <div>loading...</div>;
   }
 

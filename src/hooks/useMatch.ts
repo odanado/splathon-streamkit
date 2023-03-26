@@ -1,45 +1,26 @@
 import { doc } from "firebase/firestore";
-import {
-  useFirestore,
-  useFirestoreDocData,
-  useFirestoreDocDataOnce,
-} from "reactfire";
+import { useFirestore } from "reactfire";
 import { matchSchema } from "../schema/match";
-import type { Match } from "../schema/match";
+import { useFirestoreDoc } from "./useHoge";
 
-export const useMatch = (
-  userId: string,
-  { subscribe }: { subscribe: boolean }
-) => {
+export const useMatch = (userId: string) => {
   const firestore = useFirestore();
 
-  const ref = doc(firestore, "users", userId);
+  const userRef = doc(firestore, "users", userId);
+  const key = ["users", userId, "match"];
 
-  const { status, data } = subscribe
-    ? useFirestoreDocData(ref)
-    : useFirestoreDocDataOnce(ref);
+  const { data, dataOnce, isLoading, error, mutate } = useFirestoreDoc(
+    key,
+    userRef,
+    matchSchema,
+    "match"
+  );
 
-  const match = data?.match;
-  console.log("useMatch", { userId, status, match, data });
-
-  if (status === "success") {
-    if (match) {
-      return { status, match: matchSchema.parse(match) };
-    }
-
-    const defaultMatch: Match = {
-      id: "0-0",
-      alpha: {
-        name: "Alpha",
-        score: 0,
-      },
-      bravo: {
-        name: "Bravo",
-        score: 0,
-      },
-    };
-    return { status, match: defaultMatch };
-  }
-
-  return { status, match: undefined };
+  return {
+    match: data,
+    matchOnce: dataOnce,
+    isLoading,
+    error,
+    mutate,
+  };
 };

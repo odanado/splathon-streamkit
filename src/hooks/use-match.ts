@@ -6,12 +6,11 @@ import { useFirestoreDoc } from "./use-firestore-doc";
 export const useMatch = (userId: string) => {
   const firestore = useFirestore();
 
-  const userRef = doc(firestore, "users", userId);
   const key = ["users", userId, "match"];
 
   const { data, dataOnce, isLoading, error, mutate } = useFirestoreDoc(
-    key,
-    userRef,
+    userId === "" ? undefined : key,
+    () => doc(firestore, "users", userId),
     matchSchema,
     "match"
   );

@@ -26,7 +26,6 @@ export const Console = () => {
   if (isLoading || !match || !ladderMatchesOnce) {
     return <div>loading...</div>;
   }
-  console.log("match", match.alpha.name);
 
   const onChangeTeam = async (side: "alpha" | "bravo", team: Team) => {
     const ref = doc(firestore, "users", userId);
@@ -45,7 +44,6 @@ export const Console = () => {
   };
 
   const handleLadderMatchChange = async (ladderMatch: LadderMatch) => {
-    console.log({ ladderMatch });
     const ref = doc(firestore, "users", userId);
 
     const newMatch = {

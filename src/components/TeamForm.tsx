@@ -9,8 +9,6 @@ type Props = {
   onChange(team: Team): void | Promise<void>;
 };
 export const TeamForm = ({ side, team, onChange }: Props) => {
-  console.log("render TeamForm", team);
-
   const handleNameChange = (event: any) => {
     onChange({
       name: event.target.value,

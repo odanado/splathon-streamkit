@@ -24,12 +24,13 @@ const validateDocSnap = <T>(
 type Ref<T = DocumentData> = DocumentReference<T>;
 
 export const useFirestoreDoc = <T>(
-  key: string[],
-  ref: Ref,
+  key: string[] | undefined,
+  getRef: () => Ref,
   schema: Schema<T>,
   field: string
 ) => {
   const fetcher = async () => {
+    const ref = getRef();
     const docSnap = await getDoc(ref);
     return validateDocSnap(schema, field, docSnap);
   };
@@ -37,6 +38,7 @@ export const useFirestoreDoc = <T>(
   const { data: dataOnce, isLoading, error, mutate } = useSWR(key, fetcher);
 
   const { data } = useSWRSubscription(key, (_key, { next }) => {
+    const ref = getRef();
     const unsubscribe = onSnapshot(
       ref,
       (docSnap) => {

@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Firebase } from "./firebase";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Index } from "./routes/index";
 import { Console } from "./routes/console/$userId";
 import { Overlay } from "./routes/overlay/$userId";
@@ -37,7 +38,9 @@ function App() {
   const useEmulator = window.location.hostname === "localhost";
   return (
     <Firebase firebaseOptions={firebaseConfig} useEmulator={useEmulator}>
-      <RouterProvider router={router} />
+      <ChakraProvider>
+        <RouterProvider router={router} />
+      </ChakraProvider>
     </Firebase>
   );
 }

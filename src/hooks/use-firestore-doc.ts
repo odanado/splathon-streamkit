@@ -9,15 +9,15 @@ import useSWR from "swr";
 import useSWRSubscription from "swr/subscription";
 import { Schema } from "zod";
 
-const validateDocSnap = (
-  schema: Schema,
+const validateDocSnap = <T>(
+  schema: Schema<T>,
   field: string,
   docSnap: DocumentSnapshot<DocumentData>
 ) => {
   if (docSnap.exists()) {
-    const data = docSnap.data();
-    schema.parse(data?.[field]);
-    return data?.[field];
+    const data = docSnap.data()?.[field];
+    schema.parse(data);
+    return data as T;
   }
 };
 
@@ -47,7 +47,8 @@ export const useFirestoreDoc = <T>(
       }
     );
     return () => unsubscribe();
-  });
+  }) as { data: T };
+  // TODO: 型定義を頑張る
 
   return {
     data,

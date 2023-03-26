@@ -1,100 +1,114 @@
 import { doc, setDoc } from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  Input,
+  Flex,
+  Spacer,
+  Link,
+  Box,
+  Container,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
 import { useFirestore } from "../../firebase";
 import { useMatch } from "../../hooks/use-match";
 import { matchSchema, type Match } from "../../schema/match";
+import { TeamForm } from "../../components/TeamForm";
+import { Team } from "../../schema/team";
+import { Usage } from "../../components/Usage";
+
+const Navbar = ({ userId }: { userId: string }) => {
+  return (
+    <Flex
+      as="nav"
+      align="center"
+      justify="space-between"
+      wrap="wrap"
+      padding="1rem"
+      bg="teal.500"
+      color="white"
+    >
+      <Flex align="center" mr={5}>
+        <Box ml={3} fontSize="lg" fontWeight="bold">
+          Splathon Stremkit
+        </Box>
+      </Flex>
+
+      <Spacer />
+
+      <Box>ようこそ、{userId}さん</Box>
+    </Flex>
+  );
+};
+
+const AppContainer = ({ children }: React.PropsWithChildren) => {
+  return (
+    <Container maxW="container.xl" padding="1rem">
+      {children}
+    </Container>
+  );
+};
 
 export const Console = () => {
   const { userId } = useParams();
+  if (!userId) {
+    throw new Error("userId is required");
+  }
   const firestore = useFirestore();
-  const [state, setState] = useState<Match>({
-    id: "",
-    alpha: {
-      name: "",
-      score: 0,
-    },
-    bravo: {
-      name: "",
-      score: 0,
-    },
-  });
 
   const { isLoading, match } = useMatch(userId ?? "");
 
+  // TODO: suspense にする
   if (isLoading || !match) {
     return <div>loading...</div>;
   }
 
-  const handleChange = async (
-    side: "alpha" | "bravo",
-    field: "name" | "score",
-    value: unknown
-  ) => {
+  const onChangeTeam = async (side: "alpha" | "bravo", team: Team) => {
     const ref = doc(firestore, "users", userId ?? "");
 
     const newMatch = {
       ...match,
       [side]: {
-        ...match?.[side],
-        [field]: value,
+        ...team,
       },
     };
 
     matchSchema.parse(newMatch);
 
+    // TODO: mutation にする
     await setDoc(ref, { match: newMatch });
-
-    if (JSON.stringify(match) !== JSON.stringify(newMatch)) {
-      setState((prev) => ({
-        ...prev,
-        [side]: {
-          ...prev[side],
-          [field]: value,
-        },
-      }));
-    }
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Done");
   };
 
   return (
-    <div>
-      <div>hello {userId}</div>
-      <div>
-        alpha:
-        <div>
-          name:
-          <input
-            type="text"
-            value={match?.alpha.name}
-            onChange={(e) => handleChange("alpha", "name", e.target.value)}
+    <Box>
+      <Navbar userId={userId} />
+      <AppContainer>
+        <Box mt={2}>
+          <Alert status="warning">
+            <AlertIcon />
+            開発中のサービスです。バグがあるかもしれません。 他人の userId
+            を入力すると他人のデータを変更できてしまいます！ご注意ください！
+          </Alert>
+        </Box>
+        <Box mt={2}>
+          <Usage userId={userId} />
+        </Box>
+        <Box mt={2}>
+          <TeamForm
+            side="アルファチーム"
+            team={match.alpha}
+            onChange={(team) => onChangeTeam("alpha", team)}
           />
-          score:
-          <input
-            type="text"
-            value={match?.alpha.score}
-            onChange={(e) => handleChange("alpha", "score", e.target.value)}
+        </Box>
+        <Box mt={2}>
+          <TeamForm
+            side="ブラボーチーム"
+            team={match.bravo}
+            onChange={(team) => onChangeTeam("bravo", team)}
           />
-        </div>
-      </div>
-      <div>
-        bravo:
-        <div>
-          name:
-          <input
-            type="text"
-            value={match?.bravo.name}
-            onChange={(e) => handleChange("bravo", "name", e.target.value)}
-          />
-          bravo:
-          <input
-            type="text"
-            value={match?.bravo.score}
-            onChange={(e) => handleChange("bravo", "score", e.target.value)}
-          />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </AppContainer>
+    </Box>
   );
 };

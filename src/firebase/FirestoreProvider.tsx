@@ -25,7 +25,7 @@ export function FirestoreProvider({
     }
 
     return firestore;
-  }, [firebaseApp]);
+  }, [useEmulator, firebaseApp]);
 
   return (
     <FirestoreContext.Provider value={firestore}>

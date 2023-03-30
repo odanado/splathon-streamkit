@@ -1,4 +1,4 @@
-import { useState } from "react";
+import type { ChangeEvent } from "react";
 import { Box, FormControl, FormLabel, Input, Select } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import type { Team } from "../schema/team";
@@ -9,14 +9,14 @@ type Props = {
   onChange(team: Team): void | Promise<void>;
 };
 export const TeamForm = ({ side, team, onChange }: Props) => {
-  const handleNameChange = (event: any) => {
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange({
       name: event.target.value,
       score: Number(team.score),
     });
   };
 
-  const handleScoreChange = (event: any) => {
+  const handleScoreChange = (event: ChangeEvent<HTMLSelectElement>) => {
     onChange({
       name: team.name,
       score: Number(event.target.value),

@@ -5,8 +5,6 @@ import {
   Box,
   OrderedList,
   ListItem,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 
 type Props = {

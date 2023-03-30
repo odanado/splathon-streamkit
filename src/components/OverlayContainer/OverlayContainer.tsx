@@ -13,6 +13,7 @@ export const OverlayContainer = ({ match }: Props) => {
   // TODO: update type
   const style = {
     "--overlay-background-color": backgroundColor,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
 
   return (

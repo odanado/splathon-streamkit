@@ -5,8 +5,6 @@ import {
   DocumentData,
 } from "firebase/firestore";
 import { useFirestore } from "../firebase";
-import { matchSchema } from "../schema/match";
-import { useFirestoreDoc } from "./use-firestore-doc";
 import { ladderMatchSchema, type LadderMatch } from "../schema/ladder-match";
 import { Schema } from "zod";
 

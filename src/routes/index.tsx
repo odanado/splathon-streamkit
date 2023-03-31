@@ -16,8 +16,10 @@ import { useMatch } from "../hooks/use-match";
 import { useFirestore } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { Match } from "../schema/match";
+import { User, useUser } from "../hooks/use-user";
 
 export const Index = () => {
+  const { user, signIn } = useUser();
   const [userId, setUserId] = useState("");
   const firestore = useFirestore();
 
@@ -60,8 +62,22 @@ export const Index = () => {
     await setDoc(ref, { match: defaultMatch });
   };
 
+  const WelcomeCard = ({ user }: { user: User | undefined }) => {
+    if (!user) {
+      return null;
+    }
+    return (
+      <Card>
+        <CardHeader>ようこそ</CardHeader>
+        <CardBody>
+          <Box>{user.email} さん</Box>
+        </CardBody>
+      </Card>
+    );
+  };
   return (
     <Box>
+      <WelcomeCard user={user} />
       <Card>
         <CardHeader>ユーザー作成</CardHeader>
         <CardBody>

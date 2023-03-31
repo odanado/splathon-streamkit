@@ -5,7 +5,7 @@ import {
   Firestore,
   getFirestore,
 } from "firebase/firestore";
-import { useFirebaseApp } from "./FirebaseProvider";
+import { useFirebaseApp } from "./FirebaseAppProvider";
 
 const FirestoreContext = React.createContext<Firestore | undefined>(undefined);
 

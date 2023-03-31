@@ -1,10 +1,9 @@
-export * from "./FirebaseProvider";
-
 import { FirebaseOptions } from "firebase/app";
-import { FirebaseAppProvider } from "./FirebaseProvider";
+import { FirebaseAppProvider } from "./FirebaseAppProvider";
+import { FirebaseAuthProvider } from "./FirebaseAuthProvider";
 import { FirestoreProvider } from "./FirestoreProvider";
 
-export { useFirebaseApp } from "./FirebaseProvider";
+export { useFirebaseApp } from "./FirebaseAppProvider";
 export { useFirestore } from "./FirestoreProvider";
 
 type Props = {
@@ -20,7 +19,9 @@ export const Firebase = ({
   return (
     <FirebaseAppProvider firebaseOptions={firebaseOptions}>
       <FirestoreProvider useEmulator={useEmulator}>
-        {children}
+        <FirebaseAuthProvider useEmulator={useEmulator}>
+          {children}
+        </FirebaseAuthProvider>
       </FirestoreProvider>
     </FirebaseAppProvider>
   );

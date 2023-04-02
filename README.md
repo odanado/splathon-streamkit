@@ -6,7 +6,6 @@
 
 - Node.js
   - https://asdf-vm.com/ での導入をおすすめしてます
-- Docker
 - Java
 
 ### セットアップ

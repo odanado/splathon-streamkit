@@ -11,6 +11,14 @@ main ブランチに push すると自動的に本番環境にリリースされ
 
 ## 開発環境
 
+
+### エンドポイント
+
+|||
+|-|-|
+|streamkit|http://localhost:5173/|
+|Firebase のエミュレータ|http://localhost:4000/|
+
 ### 必要なもの
 
 - Node.js

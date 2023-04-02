@@ -10,6 +10,18 @@
 
 ### セットアップ
 
+#### Node.js のインストール (asdf の場合)
+
+```bash
+$ asdf install
+```
+
+#### Java のインストール
+
+https://www.java.com/ja/download/help/download_options_ja.html
+
+macOS なら brew で入ると思う
+
 #### パッケージのインストール
 
 ```bash

@@ -1,0 +1,1 @@
+export { SplashScoreboard } from "./SplashScoreboard";

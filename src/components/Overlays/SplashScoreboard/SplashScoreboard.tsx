@@ -10,10 +10,20 @@ export const SplashScoreboard = ({ match }: Props) => {
   const bravoName = `${match.bravo.name}`;
   const alphaScore = `${match.alpha.score}`;
   const bravoScore = `${match.bravo.score}`;
-  return <div className={classes.background}>
-    <div className={`${classes.alphaName} + ${classes.teamName}`}>{alphaName}</div>
-    <div className={`${classes.bravoName} + ${classes.teamName}`}>{bravoName}</div>
-    <div className={`${classes.alphaScore} + ${classes.score}`}>{alphaScore}</div>
-    <div className={`${classes.bravoScore} + ${classes.score}`}>{bravoScore}</div>
-  </div>;
+  return (
+    <div className={classes.background}>
+      <div className={`${classes.alphaName} + ${classes.teamName}`}>
+        {alphaName}
+      </div>
+      <div className={`${classes.bravoName} + ${classes.teamName}`}>
+        {bravoName}
+      </div>
+      <div className={`${classes.alphaScore} + ${classes.score}`}>
+        {alphaScore}
+      </div>
+      <div className={`${classes.bravoScore} + ${classes.score}`}>
+        {bravoScore}
+      </div>
+    </div>
+  );
 };

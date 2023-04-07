@@ -29,6 +29,10 @@ export const SelectLadderMatch = ({
   const [round, setRound] = useState(rounds[0]);
   const idsInRounds = ids.filter((id) => id.startsWith(round));
 
+  const targetLadderMatches = ladderMatches.filter((ladderMatch) =>
+    idsInRounds.includes(ladderMatch.id)
+  );
+
   const [idInRound, setIdInRound] = useState(idsInRounds[0]);
 
   return (
@@ -65,7 +69,7 @@ export const SelectLadderMatch = ({
             {idsInRounds.map((id, i) => {
               return (
                 <option value={id} key={id}>
-                  {`${id} ${ladderMatches[i].alpha} vs ${ladderMatches[i].bravo}`}
+                  {`${id} ${targetLadderMatches[i].alpha} vs ${targetLadderMatches[i].bravo}`}
                 </option>
               );
             })}

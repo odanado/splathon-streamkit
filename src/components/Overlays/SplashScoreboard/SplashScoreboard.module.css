@@ -6,17 +6,17 @@
   height: 100%;
 }
 .alphaName {
-  width: 350px;
+  width: 390px;
   position: absolute;
   top: 60px;
-  left: 10px;
+  left: -10px;
   z-index: 1;
 }
 .bravoName {
-  width: 350px;
+  width: 390px;
   position: absolute;
   top: 60px;
-  left: 1570px;
+  left: 1550px;
   z-index: 1;
 }
 .alphaScore {
@@ -32,9 +32,11 @@
   z-index: 1;
 }
 .teamName {
-  font-size: 35px;
+  font-size: 34px;
   font-family: sans-serif;
   font-weight: bold;
+  letter-spacing: 0em;
+  transform: scale(0.9, 1);
 
   color: white;
   -webkit-text-stroke: 2px black;
